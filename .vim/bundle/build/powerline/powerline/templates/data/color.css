@@ -1,0 +1,45 @@
+#header {
+	background-color: #930;
+}
+
+#header h1 {
+	color: white;
+}
+
+h1 a, h2 a {
+	color: white;
+}
+
+#sessions {
+	border: 2px solid #421600;
+}
+
+h2 {
+	border: 2px solid #421600;
+	background-color: #993300;
+	color: white;
+}
+
+#sessions h2 {
+	border: none;
+	border-bottom: 2px solid #421600;
+	background-color: #993300;
+	color: white;
+}
+
+body {
+	background-color: #F5F5DC;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table td {
+	border: 2px solid #421600;
+	padding: 5px;
+}
+
+.navbar a {
+	color: white;
+}

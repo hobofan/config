@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="../layout.html" />
+	<head>
+		<title>Manage Systems</title>
+		${stylesheet("/data/manager.css")}
+	</head>
+	<body class="manager">
+		<navheader>/manager/systems/</navheader>
+		<h2>Systems</h2>
+		<table>
+			<thead><tr><th> </th><th>Internal Name</th><th>Title</th></tr></thead>
+			<tbody>
+				<tr py:for="system in result">
+					<td>
+						<form action="$system.name" method="POST">
+							<input name="method" type="hidden" value="DELETE" />
+							<input name="name" type="hidden" value="$system.name" />
+							<button type="submit">Delete</button>
+						</form>
+					</td>
+					<td>$system.name</td>
+					<td>
+						<form action="$system.name" method="POST">
+							<input name="name" type="hidden" value="$system.name" />
+							<input name="title" value="$system.title" />
+							<button type="submit">Change</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>Add a New System</h2>
+		<form id="create-system" action="" method="POST">
+			<p><label for="name">Internal Name: </label><input name="name" /></p>
+			<p><label for="title">Title: </label><input name="title" /></p>
+			<p>	<button type="submit">Create</button></p>
+		</form>
+	</body>
+</html>

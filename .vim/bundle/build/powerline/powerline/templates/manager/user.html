@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="../layout.html" />
+	<head>
+		<title>Manage User $username</title>
+		${script("/js/jquery.ui.datepicker.js")}
+		${stylesheet("/data/manager.css")}
+		${stylesheet("/data/manager.datepicker.css")}
+		<script type="text/javascript">
+			$(document).ready(function (){
+				$('#ban_until').datepicker();
+			})
+		</script>
+	</head>
+	<body class="manager">
+		<navheader>/manager/users/$result.username</navheader>
+		<form action="" method="POST">
+			<input type="hidden" name="method" value="DELETE" />
+			<button type="submit">Delete</button> permanently
+		</form>
+		<py:if test="not result.banned">
+			<form action="" method="POST">
+				<input type="hidden" name="barred" value="1" />
+				<button type="submit">Bar</button> from the library
+			</form>
+			<form action="" method="POST">
+				<button type="submit">Ban</button> until <input type="text" id="ban_until" name="ban_until" />
+			</form>
+		</py:if>
+		<py:if test="result.banned">
+			<form action="" method="POST">
+				<input type="hidden" name="barred" value="0" />
+				Banned until ${result.allowed_after.strftime('%m/%d/%y')}<button type="submit">Unban</button>
+			</form>
+		</py:if>
+	</body>
+</html>

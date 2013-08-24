@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="layout.html" />
+	<head>
+		<title>the simple reservations system</title>
+		<script type="text/javascript" src="/js/sessionview.js"></script>
+	</head>
+	<body>
+		<?python
+			from powerline import output
+		?>
+		<navheader>/</navheader>
+		<ul class="navbar"><li><a href="/manager">Manager</a></li></ul>
+
+		<py:choose test="" py:if="result">
+			<message life="20" delay="10" py:when="result.open_computers == []">
+				All computers are busy. You are <strong>ticket #$result.daily_id</strong> and <strong>${output.ordinalize(result.line_position)}</strong> in line. The next computer will open up at no later than <strong>${result.open_time.strftime('%I:%M %p')}</strong>.
+			</message>
+			<message py:otherwise="" life="10" delay="5">You have reserved a computer. ${output.join([comp.title for comp in result.open_computers], 'and')} are available.</message>
+		</py:choose>
+
+		<form id="reserve-form" method="POST" action="" autocomplete="off">
+			<label for="barcode">Barcode: </label>
+			<input size="13" name="barcode" id="barcode" value="$reservation_entry_prefill" />
+			<button type="submit">Reserve a computer</button>
+		</form>
+
+		<div id="wrapper">
+			<div id="instructions">
+				<h2><a onclick="$('#instructions ol').show('slow'); $('#instructions h2 a').hide()" href="#">Show </a>Instructions</h2>
+				<ol style="display: none">
+					<li>Enter your barcode (on the back of your library card) into the <strong>Barcode</strong> box, then hit <strong>Reserve a computer</strong>.</li>
+					<li>
+						<ul>
+							<li>If there's nobody in line ahead of you, the computer will tell you which computers are available.</li>
+							<li>Otherwise, the computer will give you a ticket number and tell where you are in line.</li>
+						</ul>
+					</li>
+					<li>Once there is a computer available, go over to that computer and enter in your barcode.</li>
+				</ol>
+			</div>
+			<div id="sessions">
+				<h2>Current Reservations</h2>
+				<ul>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

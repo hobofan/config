@@ -1,0 +1,90 @@
+.navlist {
+	padding: 5px;
+}
+
+.navlist li {
+	list-style-type: none;
+	padding: 5px;
+	border: 2px solid #421600;
+	margin-bottom: 5px;
+	background-color: #930;
+	color: white;
+	font-weight: bold;
+}
+
+.navlist button {
+	color: #421600;
+	background-color: #F5F5DC;
+}
+
+.navlist form {
+	margin: 10px;
+}
+
+.navlist a {
+	text-decoration: none;
+	color: white;
+}
+
+.navlist a:hover {
+	text-decoration: underline;
+}
+
+.navlist a:visited {
+	color: white;
+}
+
+.navlist a:after {
+	content: " >>";
+	color: black;
+}
+
+body {
+	text-align: center;
+}
+
+body > * {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h2 {
+	margin: 10px auto;
+	width: 25em;
+}
+
+
+#login label {
+	width: 6em;
+}
+
+#login-setup label {
+	width: 10em;
+}
+
+button {
+	color: white;
+	background-color: #930;
+	border: 2px solid #421600;
+}
+.placeholder {
+	color: #b00;
+	text-decoration: underline;
+	cursor: pointer; cursor: hand;
+}
+.placeholder:hover {
+	text-decoration: none;
+}
+.sentence input, .sentence select {
+	border: thin solid #600;
+	color: #600;
+	font-size: 15px;
+	width: auto;
+	overflow: hidden;
+}
+.sentence {
+	width: 500px;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}

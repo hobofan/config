@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="../layout.html" />
+	<head>
+		<title>Manage Settings</title>
+		${stylesheet("/data/manager.css")}
+		${script("/js/jquery.sentenceform.js")}
+	</head>
+	<body class="manager">
+		<navheader>/manager/settings/</navheader>
+		<h2>Settings</h2>
+		<form action="" method="POST" class="sentence">
+			<input name="$name" value="${format(result[name]) if callable(format) else format % result[name]}" type="text" size="$size" py:def="input(name, size=10, format='%s')" />
+			<p><strong>Click the red, underlined text to change settings.</strong></p>
+			<p>Allow ${input('sessions_per_user', 1)} session(s), up to ${input('session_time', 3)} minutes long, per user per day.</p>
+			<p>When people are waiting, expire the first session in line after ${input('session_expire_time', 2)} minutes of waiting.</p>
+			<p>Use the codes ${input('overrides', 25, lambda v: ','.join(v))} (separated by commas) to override Powerline and log on immediately.</p>
+			<p>Fill in "${input('reservation_entry_prefill')}" in the "Barcode" entry on the main screen for users.</p>
+			<p id="koha-settings" py:if="'koha.threshold' in result"><span class="explanation-1">Allow people on if they have no more than </span>$$${input('koha.threshold', 5, '%.2f')}<span class="explanation-2"> in fines</span>.</p>
+			<p><button type="submit">Save</button></p>
+		</form>
+	</body>
+</html>

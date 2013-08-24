@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="../layout.html" />
+	<head>
+		<title>Manage Users - Search for $query</title>
+		${stylesheet("/data/manager.css")}
+	</head>
+	<body class="manager">
+		<navheader>/manager/users/search</navheader>
+		<h2>Search Results for "$query"</h2>
+		<?python from datetime import date ?>
+		<message py:if="not result">No results</message>
+		<ul id="users" py:if="result">
+			<li py:for="user in result"><a href="/manager/users/$user.username">$user.username</a><py:if test="user.allowed_after >= date.today()"> - banned</py:if></li>
+		</ul>
+	</body>
+</html>

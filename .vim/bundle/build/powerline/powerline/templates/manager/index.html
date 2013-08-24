@@ -1,0 +1,26 @@
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="../layout.html" />
+	<head>
+		<title>Manager</title>
+		${stylesheet("/data/manager.css")}
+	</head>
+	<body class="manager">
+		<navheader>/manager/</navheader>
+		<ul class="navlist">
+			<li><a href="logout">Log Out</a></li>
+			<li>
+				<a href="users/">Manage Users</a>
+				<form action="users/" method="POST">
+					<label for="username">Username: </label><input name="username" />
+					<button type="submit">Create</button>
+				</form>
+			</li>
+			<li><a href="settings/">Manage Settings</a></li>
+			<li><a href="systems/">Manage Systems</a></li>
+			<li><a href="hours/">Manage Hours</a></li>
+			<li><a href="login_setup">Change Username and Password for Manager</a></li>
+			<li><a href="session_log">Session Log for Day</a></li>
+			<li><a href="statistics">Statistics</a></li>
+		</ul>
+	</body>
+</html>

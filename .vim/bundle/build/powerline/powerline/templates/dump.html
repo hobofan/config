@@ -1,0 +1,11 @@
+<html xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="layout.html" />
+	<head>
+		<title>data</title>
+	</head>
+	<body>
+		<ul>
+			<li py:for="key, value in result.items()"><strong>$key</strong>: ${repr(value)}</li>
+		</ul>
+	</body>
+</html>
