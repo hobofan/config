@@ -1,1 +1,5 @@
 bindkey -v
+setopt prompt_subst
+
+PROMPT='%{$fg[yellow]%}%D{%H:%M %b %d}%{$reset_color%}¦%{$fg[red]%}$(ibam --percentcharge | head --lines 1 | grep -o "[0-9]*")%%%{$reset_color%}¦%n¦${PWD/#$HOME/~}
+'
