@@ -77,3 +77,5 @@ UXTerm*faceName: Inconsolata
 UXTerm*faceSize: 10 
 UXTerm*locale: true
 UXTerm*loginShell: true
+
+URxvt.font: xft:Inconsolata:size=10
