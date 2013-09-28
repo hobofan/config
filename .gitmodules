@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/CamelCaseMotion"]
 	path = .vim/bundle/CamelCaseMotion
 	url = git@github.com:bkad/CamelCaseMotion.git
+[submodule ".vim/bundle/emmet-vim"]
+	path = .vim/bundle/emmet-vim
+	url = http://github.com/mattn/emmet-vim.git

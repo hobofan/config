@@ -13,6 +13,7 @@ set nocompatible
 set t_Co=256
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.erb setl shiftwidth=2 expandtab
 " let g:Powerline_symbols = 'fancy'
 let g:atp_Compiler='bash'
 "
