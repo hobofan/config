@@ -16,4 +16,6 @@ au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.erb setl shiftwidth=2 expandtab
 " let g:Powerline_symbols = 'fancy'
 let g:atp_Compiler='bash'
-"
+" let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1 
+let g:rubycomplete_rails = 1
