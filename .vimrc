@@ -3,19 +3,17 @@ syntax on
 filetype plugin indent on
 set background=dark
 set number
-set shiftwidth=4
-set tabstop=4
-set tabstop=4
 colorscheme solarized
+set shiftwidth=2
+set tabstop=2
 set laststatus=2
 set encoding=utf-8
-set nocompatible
 set t_Co=256
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+"au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab
-au BufNewFile,BufReadPost *.erb setl shiftwidth=2 expandtab
+"au BufNewFile,BufReadPost *.erb setl shiftwidth=2 expandtab
 " let g:Powerline_symbols = 'fancy'
 let g:atp_Compiler='bash'
-" let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1 
 let g:rubycomplete_rails = 1

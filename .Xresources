@@ -73,9 +73,10 @@ XTerm*.faceName: Monospace
 XTerm*.faceSize: 8
 XTerm*loginShell: true
 
-UXTerm*faceName: Inconsolata 
+! UXTerm*faceName: Inconsolata 
+UXTerm*faceName: Inconsolata for Powerline
 UXTerm*faceSize: 10 
 UXTerm*locale: true
 UXTerm*loginShell: true
 
-URxvt.font: xft:Inconsolata:size=10
+!URxvt.font: xft:Inconsolata:size=10

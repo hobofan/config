@@ -1,5 +1,75 @@
 bindkey -v
 setopt prompt_subst
 
-PROMPT='%{$fg[yellow]%}%D{%H:%M %b %d}%{$reset_color%}¦%{$fg[red]%}$(ibam --percentcharge | head --lines 1 | grep -o "[0-9]*")%%%{$reset_color%}¦%n¦${PWD/#$HOME/~}
+GIT_PROMPT_SYMBOL="%{$fg[cyan]%}"
+# GIT_PROMPT_PREFIX="%{$bg[cyan]$fg[black]%}[%{$reset_color%}"
+# GIT_PROMPT_SUFFIX="%{$bg[cyan]$fg[black]%}]%{$reset_color%}"
+GIT_PROMPT_AHEAD="%{$bg[cyan]$fg[red]%}ANUM%{$reset_color%}"
+GIT_PROMPT_BEHIND="%{$bg[cyan]$fg[red]%}BNUM%{$reset_color%}"
+GIT_PROMPT_MERGING="%{$bg[red]$fg_bold[black]%}[conflict]%{$reset_color%}"
+GIT_PROMPT_UNTRACKED="%{$bg[cyan]$fg[black]%}[untracked]%{$reset_color%}"
+GIT_PROMPT_MODIFIED="%{$bg[cyan]$fg[black]%}[unstaged]%{$reset_color%}"
+GIT_PROMPT_STAGED="%{$bg[cyan]$fg[black]%}[staged]%{$reset_color%}"
+
+# Show Git branch/tag, or name-rev if on detached head
+parse_git_branch() {
+  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+}
+
+# Show different symbols as appropriate for various Git repository states
+parse_git_state() {
+
+  # Compose this value via multiple conditional appends.
+  local GIT_STATE=""
+
+  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_AHEAD" -gt 0 ]; then
+    GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
+  fi
+
+  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_BEHIND" -gt 0 ]; then
+    GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
+  fi
+
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
+  fi
+
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
+  fi
+
+  if ! git diff --quiet 2> /dev/null; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
+  fi
+
+  if ! git diff --cached --quiet 2> /dev/null; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
+  fi
+
+  if [[ -n $GIT_STATE ]]; then
+    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
+  fi
+
+}
+
+# If inside a Git repository, print its branch and state
+git_prompt_string() {
+  local git_where="$(parse_git_branch)"
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)%{$bg[yellow]$fg_bold[black]%}[${git_where#(refs/heads/|tags/)}]%{$reset_color%}"
+}
+
+charging_direction() {
+	if [[ -n $(acpi -V | grep Charging) ]]; then
+		echo "+"
+	fi
+	if [[ -n $(acpi -V | grep Discharging) ]]; then
+		echo "\u2212"
+	fi
+}
+
+# Set the right-hand prompt
+PROMPT='%{$bg[yellow]$fg[black]%}%D{%H:%M %b %d} %{$reset_color%}%{$bg[red]$fg[black]%}$(charging_direction)$(acpi | grep -o "[0-9]*%") %%%{$reset_color%}%{$bg[cyan]$fg[black]%} %n %{$reset_color%}%{$fg[cyan]%}%{$reset_color%} ${PWD/#$HOME/~} $(git_prompt_string)
 '
