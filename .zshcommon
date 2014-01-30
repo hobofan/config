@@ -1,6 +1,8 @@
 bindkey -v
 setopt prompt_subst
 
+source $ZSH_CUSTOM/configflags.zsh 
+
 GIT_PROMPT_SYMBOL="%{$fg[cyan]%}"
 # GIT_PROMPT_PREFIX="%{$bg[cyan]$fg[black]%}[%{$reset_color%}"
 # GIT_PROMPT_SUFFIX="%{$bg[cyan]$fg[black]%}]%{$reset_color%}"
@@ -70,6 +72,13 @@ charging_direction() {
 	fi
 }
 
+charging_status() {
+  if [ "$USING_LAPTOP" == true ]; then
+		echo "$(charging_direction)$(acpi | grep -o '[0-9]*%') %%"
+	else
+		echo ""
+	fi
+}
 # Set the right-hand prompt
-PROMPT='%{$bg[yellow]$fg[black]%}%D{%H:%M %b %d} %{$reset_color%}%{$bg[red]$fg[black]%}$(charging_direction)$(acpi | grep -o "[0-9]*%") %%%{$reset_color%}%{$bg[cyan]$fg[black]%} %n %{$reset_color%}%{$fg[cyan]%}%{$reset_color%} ${PWD/#$HOME/~} $(git_prompt_string)
+PROMPT='%{$bg[yellow]$fg[black]%}%D{%H:%M %b %d} %{$reset_color%}%{$bg[red]$fg[black]%}%{$reset_color%}%{$bg[cyan]$fg[black]%} %n %{$reset_color%}%{$fg[cyan]%}%{$reset_color%} ${PWD/#$HOME/~} $(git_prompt_string)
 '
