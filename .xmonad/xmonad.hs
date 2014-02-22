@@ -8,6 +8,7 @@
 --
 
 import XMonad
+import XMonad.Util.Run
 import Data.Monoid
 import System.Exit
 import XMonad.Layout.IndependentScreens
@@ -116,6 +117,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+
+    -- CUSTOM
+    -- Switch Keyboard layout to en 
+    , ((modm              , xK_i),spawn "setxkbmap -layout us")
+    -- Switch Keyboard layout to de 
+    , ((modm              , xK_o), spawn "setxkbmap -layout de")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.

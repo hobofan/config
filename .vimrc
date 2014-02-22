@@ -5,6 +5,7 @@ set background=dark
 set number
 colorscheme solarized
 set shiftwidth=2
+set expandtab
 set tabstop=2
 set laststatus=2
 set encoding=utf-8

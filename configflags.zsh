@@ -1,1 +1,1 @@
-USING_LAPTOP=true
+USING_LAPTOP=false
