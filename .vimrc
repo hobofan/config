@@ -23,3 +23,7 @@ let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
 cmap w!! w !sudo tee > /dev/null % 
+
+"Display all non-whitespace characters as something
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
