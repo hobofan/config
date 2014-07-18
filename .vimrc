@@ -27,3 +27,5 @@ cmap w!! w !sudo tee > /dev/null %
 "Display all non-whitespace characters as something
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
+
+let mapleader = ","

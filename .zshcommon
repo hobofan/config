@@ -1,4 +1,3 @@
-bindkey -v
 setopt prompt_subst
 
 source $ZSH_CUSTOM/configflags.zsh 
