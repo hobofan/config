@@ -124,6 +124,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Switch Keyboard layout to de 
     , ((modm              , xK_o), spawn "setxkbmap -layout de")
 
+    , ((modm              , xK_KP_Page_Up), spawn "xbacklight -set 100")
+    , ((modm              , xK_KP_Up), spawn "xbacklight -set 75")
+    , ((modm              , xK_KP_Home), spawn "xbacklight -set 50")
+    , ((modm              , xK_KP_Right), spawn "xbacklight -set 25")
+    , ((modm              , xK_KP_Begin), spawn "xbacklight -set 10")
+    , ((modm              , xK_KP_Left), spawn "xbacklight -set 1")
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.

@@ -1,4 +1,8 @@
-execute pathogen#infect()
+"execute pathogen#infect()
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
 syntax on
 filetype plugin indent on
 set background=dark
@@ -19,13 +23,14 @@ au BufNewFile,BufReadPost *.rake setl shiftwidth=2 expandtab
 let g:Powerline_symbols = 'fancy'
 let g:atp_Compiler='bash'
 let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1 
+let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
-cmap w!! w !sudo tee > /dev/null % 
+cmap w!! w !sudo tee > /dev/null %
 
 "Display all non-whitespace characters as something
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
 
 let mapleader = ","
+
